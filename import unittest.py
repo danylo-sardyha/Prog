@@ -1,52 +1,31 @@
 import unittest
-from Lab1 import zigzag 
+from Lab2 import max_hamsters
 
-class TestZigzagTraverse(unittest.TestCase):
-    
-    def test_m5_n5(self):
-        matrix = [
-            [ 1,  2,  3,  4,  5],
-            [ 6,  7,  8,  9, 10],
-            [11, 12, 13, 14, 15],
-            [16, 17, 18, 19, 20],
-            [21, 22, 23, 24, 25]
-        ]
-        expected = [
-            1, 2, 6, 11, 7, 3, 4, 8, 12, 16, 21, 17, 13, 9, 5, 
-            10, 14, 18, 22, 23, 19, 15, 20, 24, 25
-        ]
-        self.assertEqual(zigzag(matrix), expected)
-        
-    def test_m2_n4(self):
-        matrix = [
-            [1, 2, 3, 4],
-            [5, 6, 7, 8]
-        ]
-        expected = [1, 2, 5, 6, 3, 4, 7, 8]
-        self.assertEqual(zigzag(matrix), expected)
+class TestHamsters(unittest.TestCase):
 
-    def test_m6_n1(self):
-        matrix = [
-            [1], [2], [3], [4], [5], [6]
-        ]
-        expected = [1, 2, 3, 4, 5, 6]
-        self.assertEqual(zigzag(matrix), expected)
+    def test_example_1(self):
+        S = 7
+        C = 3
+        hamsters = [[1, 2], [2, 2], [3, 1]]
+        self.assertEqual(max_hamsters(S, C, hamsters), 2)
 
-    def test_m1_n1(self):
-        matrix = [
-            [42]
-        ]
-        expected = [42]
-        self.assertEqual(zigzag(matrix), expected)
-    
-    def test_m3_m3(self):
-        matrix=[
-            [1], [2], [3],
-            [4], [5], [6],
-            [7], [8], [9]    
-              ]
-        expected = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        self.assertEqual(zigzag(matrix), expected)
+    def test_example_2(self):
+        S = 19
+        C = 4
+        hamsters = [[5, 0], [2, 2], [1, 4], [5, 1]]
+        self.assertEqual(max_hamsters(S, C, hamsters), 3)
+
+    def test_example_3(self):
+        S = 2
+        C = 2
+        hamsters = [[1, 5], [1, 6]]
+        self.assertEqual(max_hamsters(S, C, hamsters), 1)
+
+    def test_example_4(self):
+        S = 32
+        C = 2
+        hamsters = [[1, 2], [3, 4], [5, 6]]
+        self.assertEqual(max_hamsters(S, C, hamsters), 2)
 
 if __name__ == '__main__':
-    unittest.main(argv=[''], exit=False)
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)
