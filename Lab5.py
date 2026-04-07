@@ -1,10 +1,11 @@
+import collections
+
 def flood_fill(matrix, start_row, start_col, new_color):
     """
     Flood fill
     """
     rows = len(matrix)
     cols = len(matrix[0]) if rows > 0 else 0
-    
 
     if rows == 0 or cols == 0 or start_row < 0 or start_row >= rows or start_col < 0 or start_col >= cols:
         return matrix
@@ -14,21 +15,19 @@ def flood_fill(matrix, start_row, start_col, new_color):
     if target_color == new_color:
         return matrix
 
-    def dfs(r, c):
+    queue = collections.deque([(start_row, start_col)])
+    matrix[start_row][start_col] = new_color
 
-        if r < 0 or r >= rows or c < 0 or c >= cols or matrix[r][c] != target_color:
-            return
-        
- 
-        matrix[r][c] = new_color
-        
+    while queue:
+        r, c = queue.popleft()
 
-        dfs(r - 1, c)
-        dfs(r + 1, c)
-        dfs(r, c - 1)
-        dfs(r, c + 1)
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nr, nc = r + dr, c + dc
 
-    dfs(start_row, start_col)
+            if 0 <= nr < rows and 0 <= nc < cols and matrix[nr][nc] == target_color:
+                matrix[nr][nc] = new_color
+                queue.append((nr, nc))
+
     return matrix
 
 
@@ -61,10 +60,10 @@ def main():
                     line_str += ','
                 f.write(line_str + '\n')
                 
-        print("Успіх! Алгоритм виконав заливку. Перевірте файл output.txt.")
+        print("Успіх! BFS алгоритм виконав заливку. Перевірте файл output.txt.")
 
     except FileNotFoundError:
-        print("Помилка: Файл input.txt не знайдено. Створіть його у тій самій папці, де знаходиться скрипт.")
+        print("Помилка: Файл input.txt не знайдено.")
     except Exception as e:
         print(f"Сталася неочікувана помилка під час обробки: {e}")
 
